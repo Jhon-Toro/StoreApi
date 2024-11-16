@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from sqlalchemy.orm import Session
+import uvicorn
 from app.database import engine, Base, get_db
 from app.routes import auth_router, product_router, category_router, review_router, order_router, admin_router
 from app.utils.auth import get_password_hash
@@ -34,6 +35,14 @@ async def lifespan(app: FastAPI):
     yield 
 
 app = FastAPI(lifespan=lifespan)
+
+@app.get("/")
+def read_root():
+    return {"message": "API is running!"}
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
 
 app.add_middleware(
     CORSMiddleware,

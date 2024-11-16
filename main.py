@@ -34,16 +34,9 @@ async def lifespan(app: FastAPI):
     db = next(get_db())
     create_admin_account(db)
     yield 
+    db.close() 
 
 app = FastAPI(lifespan=lifespan)
-
-@app.get("/")
-def read_root():
-    return {"message": "API is running!"}
-
-if __name__ == "__main__":
-    port = int(os.getenv("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
 
 app.add_middleware(
     CORSMiddleware,
@@ -60,3 +53,11 @@ app.include_router(category_router, prefix="/categories", tags=["categories"])
 app.include_router(review_router, prefix="/reviews", tags=["reviews"])
 app.include_router(order_router, prefix="/orders", tags=["orders"])
 app.include_router(admin_router, prefix="/admin", tags=["admin"])
+
+@app.get("/")
+def read_root():
+    return {"message": "Hola!"}
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)

@@ -62,3 +62,111 @@ Las contribuciones son bienvenidas. Por favor, abre un issue o un pull request p
 
 ## Licencia
 Este proyecto está bajo la licencia MIT.
+
+// API POSTMAN REST CLIENT
+
+### Variables
+@baseUrl = http://localhost:8000
+@token = <your_actual_token>
+
+### Register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "David Toro2",
+  "email": "toromurieljhon2@gmail.com",
+  "password": "Test"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "adminpassword"
+}
+
+### Create Product
+POST {{baseUrl}}/products/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Hola",
+    "description": "Nueva descripción",
+    "category_id": 6,
+    "price": 19.99,
+    "images": ["https://www.corbataslester.com/magazine/wp-content/uploads/2018/01/oxford02.jpg", "https://mariohernandez.vtexassets.com/arquivos/ids/213954/zapatos-garcia-negro-premium_1.jpg", ""]
+}
+
+### Delete Product
+DELETE {{baseUrl}}/products/2
+Authorization: Bearer {{token}}
+
+### Edit Product
+PUT {{baseUrl}}/products/2
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Nuevo título actualizado",
+    "description": "Descripción actualizada",
+    "price": 25.99,
+    "category_id": 5,
+    "images": ["https://newimage1.jpg", "https://newimage2.jpg", ""]
+}
+
+### Get Product by ID
+GET {{baseUrl}}/products/4
+Authorization: Bearer {{token}}
+
+### Get My Personal Orders
+GET {{baseUrl}}/my_orders/
+Authorization: Bearer {{token}}
+
+### Get All Orders
+GET {{baseUrl}}/orders/
+Authorization: Bearer {{token}}
+
+### Create Order
+POST {{baseUrl}}/orders/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "total_price": 59.97,
+  "items": [
+    {
+      "product_id": 1,
+      "quantity": 2
+    },
+    {
+      "product_id": 3,
+      "quantity": 1
+    }
+  ]
+}
+
+### Create Review
+POST {{baseUrl}}/reviews/
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "rating": 5,
+    "comment": "Excelente producto",
+    "product_id": 2
+}
+
+### Get Category by ID
+GET {{baseUrl}}/categories/4
+
+### Delete Category
+DELETE {{baseUrl}}/categories/10
+Authorization: Bearer {{token}}
+
+### Get All Categories
+GET {{baseUrl}}/categories/
+

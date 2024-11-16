@@ -1,0 +1,23 @@
+# Byte-compiled / optimized / DLL files / SH
+__pycache__/
+*.py[cod]
+start.sh
+
+/tmp
+
+# C extensions
+*.so
+
+#Enviroments
+.env
+/.venv
+/modules
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+
+# macOS files
+.DS_Store

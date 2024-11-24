@@ -65,8 +65,8 @@ def create_order(
         "intent": "CAPTURE",
         "purchase_units": [{"amount": {"currency_code": "USD", "value": str(new_order.total_price)}}],
         "application_context": {
-            "return_url": "order/success",
-            "cancel_url": "order/cancel"
+            "return_url": "http://localhost:5173/order/success",
+            "cancel_url": "http://localhost:5173/order/cancel"
         }
     }
     response = requests.post(f"{PAYPAL_API_BASE}/v2/checkout/orders", json=data, headers=headers)
